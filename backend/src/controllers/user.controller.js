@@ -16,6 +16,7 @@ exports.create = async (req, res) => {
       password: password,
       telefone: telefone,
       cpf: cpf,
+      bio: bio,
       cargo: "Usuario",
     };
 

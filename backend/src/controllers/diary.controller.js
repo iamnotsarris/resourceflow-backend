@@ -6,19 +6,19 @@ exports.create = async (req, res) => {
   try {
     const { name, description, category, location } = req.body;
 
-    if (!name || !description || !category || !location) {
+    if (!name || !category || !location || !description) {
       return res.status(400).send({ message: "Preencha todos os campos! " });
     }
 
     const diary = {
       nome: name,
-      descricao: description,
       categoria: category,
       localizacao: location,
+      descricao: description,
     };
 
     const data = await Diary.create(diary);
-    res.send(data);
+    res.status(201).send(data);
   } catch (err) {
     res.status(500).send({
       message: err.message || "Erro ao criar evento.",
@@ -27,6 +27,13 @@ exports.create = async (req, res) => {
 };
 
 // Listando Eventos
-// exports.retrive = async (req, res) => {
-//   var id
-// }
+exports.retrive = async (req, res) => {
+  try {
+    const data = await Diary.findAll();
+    res.status(201).send(data);
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Erro ao buscar eventos no DB.",
+    });
+  }
+};

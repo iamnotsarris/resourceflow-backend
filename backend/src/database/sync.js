@@ -1,4 +1,4 @@
 const connection = require("../database/database.js");
 require("../models/user.models.js");
 
-connection.sync();
+connection.sync({ alter: true });

@@ -24,13 +24,11 @@ const User = connection.define("user", {
   },
   cargo: {
     type: Sequelize.STRING(20),
-    allowNull: true,
-    defaultValue: "Estudante",
+    allowNull: false,
   },
   bio: {
-    type: Sequelize.STRING(20),
-    allowNull: true,
-    defaultValue: "Usuário do Resource Flow.",
+    type: Sequelize.STRING(100),
+    allowNull: false,
   },
   // avatar: {
   //   type: Image

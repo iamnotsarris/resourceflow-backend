@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 exports.create = async (req, res) => {
   try {
-    const { name, email, password, telefone, cpf } = req.body;
+    const { name, email, password, telefone, cpf, bio } = req.body;
 
     if (!name || !email || !password || !telefone || !cpf) {
       return res.status(400).send({ message: "Preencha todos os campos!" });
@@ -16,7 +16,7 @@ exports.create = async (req, res) => {
       password: password,
       telefone: telefone,
       cpf: cpf,
-      bio: bio,
+      bio: bio || "",
       cargo: "Usuario",
     };
 

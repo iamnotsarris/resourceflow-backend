@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "homepage": "https://<Victor-Sarris.github.io/<site-totenzinho>",
+  "description": "backend resourceflow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "author": "VS 2005",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.16.2",
+    "nodemon": "^3.1.14",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}

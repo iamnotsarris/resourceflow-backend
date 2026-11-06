@@ -14,8 +14,6 @@ connection
   .then(() => console.log("Banco de dados sincronizado."))
   .catch((err) => console.error("Erro ao sincronizar banco:", err));
 
-// O CORS agora é tratado primariamente pelo vercel.json na Vercel.
-// Para o ambiente local, o cors() básico já resolve.
 app.use(
   cors({
     origin: "https://resource-flow-scholar.vercel.app",

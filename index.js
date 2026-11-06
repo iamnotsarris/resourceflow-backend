@@ -14,33 +14,9 @@ connection
   .then(() => console.log("Banco de dados sincronizado."))
   .catch((err) => console.error("Erro ao sincronizar banco:", err));
 
-// --- CONFIGURAÇÃO DO CORS ---
-const allowedOrigins = [
-  "https://resource-flow-scholar.vercel.app",
-  "http://localhost:5173",
-  "http://localhost:3000",
-];
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Permite requisições sem origem (Postman, etc.) ou se estiver na lista
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, // Importante para algumas requisições de preflight
-};
-
-// Aplica o CORS em todas as rotas
-app.use(cors(corsOptions));
-
-// Responde explicitamente a requisições OPTIONS (Preflight)
-// No Express 5, usar regex é a forma segura de pegar todas as rotas
-app.options(/(.*)/, cors(corsOptions));
+// O CORS agora é tratado primariamente pelo vercel.json na Vercel.
+// Para o ambiente local, o cors() básico já resolve.
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

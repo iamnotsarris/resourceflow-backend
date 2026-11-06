@@ -16,7 +16,13 @@ connection
 
 // O CORS agora é tratado primariamente pelo vercel.json na Vercel.
 // Para o ambiente local, o cors() básico já resolve.
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://resource-flow-scholar.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

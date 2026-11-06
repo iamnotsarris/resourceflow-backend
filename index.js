@@ -1,10 +1,14 @@
+// index.js
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const db = require("./src/models/user.models.js");
-require("dotenv").config();
 
 const connection = require("./src/database/database.js");
+const db = require("./src/models/user.models.js");
+
+// Sincronização do banco
 connection
   .sync()
   .then(() => console.log("Banco de dados sincronizado."))

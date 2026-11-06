@@ -1,6 +1,5 @@
 const Sequelize = require("sequelize");
 const connection = require("../database/database.js");
-const connect = require("../database/database.js");
 
 const Diary = connection.define("diary", {
   nome: {
@@ -15,7 +14,8 @@ const Diary = connection.define("diary", {
     type: Sequelize.STRING(50),
     allowNull: false,
   },
-  locacalizacao: {
+  localizacao: {
+    // Corrigido erro de digitação (era locacalizacao)
     type: Sequelize.STRING(50),
     allowNull: false,
   },

@@ -7,11 +7,12 @@ const connect = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
-    dialect: "postgres",
+    dialect: "postgres", // Configurado para o Neon
     logging: false,
     dialectOptions: {
       ssl: { require: true, rejectUnauthorized: false },
     },
   },
 );
+
 module.exports = connect;

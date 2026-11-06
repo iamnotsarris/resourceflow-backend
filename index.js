@@ -1,14 +1,15 @@
 // index.js
-require("dotenv").config();
+require("dotenv").config(); // Carrega o .env ANTES de tudo
 
 const express = require("express");
 const cors = require("cors");
 const app = express();
 
 const connection = require("./src/database/database.js");
-const db = require("./src/models/user.models.js");
+require("./src/models/user.models.js"); // Importa para registrar o modelo
+require("./src/models/diary.models.js"); // Importa para registrar o modelo
 
-// Sincronização do banco
+// Sincronização do banco (Cria as tabelas se não existirem)
 connection
   .sync()
   .then(() => console.log("Banco de dados sincronizado."))
@@ -23,7 +24,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Bem-vindo ao Backend do ResourceFlow." });
 });
 
+// Rotas
 require("./src/routes/user.routes.js")(app);
+// Se você tiver um diary.routes.js, descomente abaixo:
+// require("./src/routes/diary.routes.js")(app);
 
 // Porta do servidor
 const PORT = process.env.PORT || 3000;

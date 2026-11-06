@@ -30,7 +30,7 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
   try {
     const data = await Diary.findAll();
-    res.status(201).send(data);
+    res.status(200).send(data);
   } catch (err) {
     res.status(500).send({
       message: err.message || "Erro ao buscar eventos no DB.",
@@ -38,7 +38,7 @@ exports.findAll = async (req, res) => {
   }
 };
 
-// Listando eventos por Id {
+// Listando eventos por Id
 exports.findOne = async (req, res) => {
   try {
     const id = req.params.id;
@@ -47,35 +47,36 @@ exports.findOne = async (req, res) => {
     if (!data) {
       return res
         .status(404)
-        .send({ message: `Èvento não encontrado com id ${id}` });
+        .send({ message: `Evento não encontrado com id ${id}` });
     }
+    res.status(200).send(data); // Corrigido: Faltava enviar os dados de volta
   } catch (err) {
     res
       .status(500)
-      .send({ message: `Evento não encontrado com o id=${req.params.id}` });
+      .send({ message: `Erro ao buscar evento com id=${req.params.id}` });
   }
 };
 
 // Atualizando eventos por id
 exports.update = async (req, res) => {
   try {
+    const id = req.params.id; // Corrigido: Faltava declarar o ID
     const { name, description, category, location } = req.body;
     const updateData = {};
 
-    if (name) updateData.nome = nome;
-    if (description) updateData.nome = description;
-    if (category) updateData.nome = category;
-    if (location) updateData.nome = location;
+    if (name) updateData.nome = name;
+    if (description) updateData.descricao = description; // Corrigido mapeamento
+    if (category) updateData.categoria = category; // Corrigido mapeamento
+    if (location) updateData.localizacao = location; // Corrigido mapeamento
 
-    const num = await Diary.update(updateData, {
-      where: { id: id },
-    });
+    const num = await Diary.update(updateData, { where: { id: id } });
 
-    if ((num = 1)) {
+    // O Sequelize retorna um array [linhasAfetadas] no update
+    if (num[0] === 1) {
       res.status(200).send({ message: `Evento atualizado com sucesso!` });
     } else {
       res.status(400).send({
-        message: `Não foi possivel atualizar o evento com id ${req.params.id}. O evento pode não ter sido encontrado ou o corpo da requisição está vazio!`,
+        message: `Não foi possível atualizar o evento com id ${id}.`,
       });
     }
   } catch (err) {
@@ -86,7 +87,8 @@ exports.update = async (req, res) => {
 };
 
 // Deletando eventos por id
-exports.detele = async (req, res) => {
+exports.delete = async (req, res) => {
+  // Corrigido typo (era detele)
   try {
     const id = req.params.id;
 
@@ -94,7 +96,7 @@ exports.detele = async (req, res) => {
       where: { id: id },
     });
 
-    if (num == 1) {
+    if (num === 1) {
       res.status(200).send({ message: "Evento deletado com sucesso!" });
     } else {
       res.status(400).send({

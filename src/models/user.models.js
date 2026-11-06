@@ -28,11 +28,8 @@ const User = connection.define("user", {
   },
   bio: {
     type: Sequelize.STRING(100),
-    allowNull: false,
+    allowNull: true, // Alterado para true, pois nem sempre o usuário preenche
   },
-  // avatar: {
-  //   type: Image
-  // }
 });
 
 module.exports = User;
